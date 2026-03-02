@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/golangci/plugin-module-register/register"
-	adapter "github.com/mario-pinderi/goqueryguard/internal/golangci/moduleplugin"
 	"golang.org/x/tools/go/analysis"
 )
 
@@ -40,7 +39,7 @@ func New(conf any) (register.LinterPlugin, error) {
 
 // BuildAnalyzers returns the analyzers exposed by this plugin.
 func (p *plugin) BuildAnalyzers() ([]*analysis.Analyzer, error) {
-	a, err := adapter.NewAnalyzerFromConfigPath(p.configPath)
+	a, err := NewAnalyzerFromConfigPath(p.configPath)
 	if err != nil {
 		return nil, err
 	}

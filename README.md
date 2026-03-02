@@ -166,10 +166,37 @@ Run tests:
 go test ./...
 ```
 
+## Direct go/analysis API
+
+For non-plugin integrations, import:
+`github.com/mario-pinderi/goqueryguard/golangci/analyzer`
+
+Use `NewAnalyzerFromConfigPath` to construct a configured analyzer directly:
+
+```go
+package main
+
+import (
+	"log"
+
+	goqueryanalyzer "github.com/mario-pinderi/goqueryguard/golangci/analyzer"
+)
+
+func main() {
+	a, err := goqueryanalyzer.NewAnalyzerFromConfigPath(".goqueryguard.yaml")
+	if err != nil {
+		log.Fatal(err)
+	}
+	_ = a
+}
+```
+
 ## golangci-lint Module Plugin
 
 This repository now exposes a public module-plugin package at:
 `github.com/mario-pinderi/goqueryguard/golangci/moduleplugin`
+
+The module plugin uses the direct constructor above under the hood.
 
 Registered linter name: `goqueryguard`
 
